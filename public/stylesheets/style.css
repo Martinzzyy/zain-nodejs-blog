@@ -1,8 +1,66 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+@charset "utf-8";
+body, ul, dl, dd, dt, ol, li, p, h1, h2, h3, h4, h5, h6, textarea, form, select, fieldset, table, td, div, input {margin:0;padding:0;-webkit-text-size-adjust: none}
+*{ -webkit-text-size-adjust:none; margin: 0; padding: 0; border: none; font: 12px "Lucida Grande", Helvetica, Arial, sans-serif; }
+html,body{color:#313131; width:100%;height:100%;background-color: #fff;}
+ol,ul { list-style:none; }
+a:active, a:focus,a:visited{ outline:none; }
+a{ text-decoration: none;cursor: pointer; }
+
+#contentBox{
+  width: 1024px;
+  height: auto;
+  margin: 0 auto;
 }
 
-a {
-  color: #00B7FF;
+#header{
+  width: 100%;
+  height: 100px;
+  border-bottom: 2px solid #bbb;
+  background-color: #fff;
+  margin-bottom: 20px;
+  position: relative;
+}
+#header .title{
+  color: #111;
+  font-size: 30px;
+  font-weight: bold;
+  line-height: 60px;
+  padding-left: 30px;
+}
+
+#header .tweet{
+  color:#7a7a7a;
+  font-size: 14px;
+  line-height: 18px;
+  padding-left: 30px;
+  width: 450px;
+  height: 36px;
+}
+
+#header #searchform{
+  position: absolute;
+  right: 0;
+  top: 20px;
+}
+#header input[type='text']{
+  background: url(../images/search.png) no-repeat 5px 6px;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
+  font-size: 14px;
+  height: 22px;
+  width: 170px;
+  border: 1px solid #ddd;
+  color: #888;
+  line-height: 1.2em;
+  padding: 4px 10px 4px 28px;
+}
+#main-right{
+  width: 220px;
+  float: right;
+  background: red;
+}
+#main-left{
+  width: 800px;
+  float: left;
+  background: gold;
 }

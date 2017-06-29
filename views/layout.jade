@@ -4,4 +4,17 @@ html
     title= title
     link(rel='stylesheet', href='/stylesheets/style.css')
   body
-    block content
+    div#contentBox
+      //header部分
+      div#header
+        a.title(href='http://zainzhou.com') ZainZhou的博客
+        div.tweet 好写代码不求甚解
+        //搜索
+        form(method='get',action='',id='searchform')
+          input(type='text', name='s',id='s',placeholder='搜索')
+      //左边文章部分
+      div#main-left
+        block content
+      //右边label部分
+      div#main-right
+        span left
