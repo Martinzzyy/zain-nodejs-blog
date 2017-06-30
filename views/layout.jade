@@ -2,12 +2,17 @@ doctype html
 html
   head
     title= title
+    <meta name="keywords" content="#{keywords}" />
+    block description
     link(rel='stylesheet', href='/stylesheets/style.css')
+    block styles
+    script(src='https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js')
+    block scripts
   body
     div#contentBox
       //header部分
       div#header
-        a.title(href='http://zainzhou.com') ZainZhou的博客
+        a.title(href= url) #{myname}的博客
         div.tweet 好写代码不求甚解
         //搜索
         form(method='get',action='',id='searchform')
@@ -15,6 +20,9 @@ html
       //左边文章部分
       div#main-left
         block content
+
       //右边label部分
       div#main-right
-        span left
+        -for(var i in labels){
+            a.label(dataid= labels[i].id, href='?l=#{labels[i].id}')= labels[i].name
+        -}

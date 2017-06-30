@@ -1,5 +1,12 @@
 extends layout
-
+block styles
+  link(rel='stylesheet', href='/stylesheets/index.css')
 block content
-  h1= title
-  p Welcome to #{title}
+  -if(!!list){
+  - for(var i in list){
+      div=list[i]
+  - }
+    
+  -}else{
+    div.NullData  向着代码，发起进攻(　 ´-ω ･)▄︻┻┳══━一
+  -}

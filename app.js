@@ -4,16 +4,33 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var config = require('./models/baseconfig');
+var LabelsHelper = require('./models/labels');
 
 var index = require('./routes/index');
 var users = require('./routes/users');
 
 var app = express();
-
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
+app.locals.myname = config.myName;
+app.locals.url = config.Url;
+app.locals.title = config.myName+'的博客';
+app.locals.keywords = config.KeyWords.join(',');
 
+console.log('labels'+app.locals.labels);
+
+if(!app.locals.labels){
+  LabelsHelper.getAll(function(data){
+    app.locals.labels = data;
+  });
+}
+setInterval(function(){
+  LabelsHelper.getAll(function(data){
+    app.locals.labels = data;
+  });
+},1000*60*10);
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));

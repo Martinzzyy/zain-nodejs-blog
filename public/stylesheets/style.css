@@ -54,13 +54,27 @@ a{ text-decoration: none;cursor: pointer; }
   line-height: 1.2em;
   padding: 4px 10px 4px 28px;
 }
+#main-left,#main-right{
+  overflow:hidden;
+}
 #main-right{
   width: 220px;
   float: right;
-  background: red;
 }
 #main-left{
   width: 800px;
   float: left;
-  background: gold;
+}
+
+.label{
+  display: inline-block;
+  padding: 0 5px;
+  cursor: pointer;
+  line-height: 18px;
+  margin: 5px;
+  color: #111;
+}
+
+.label:hover{
+  background-color: #eee;
 }
