@@ -1,0 +1,46 @@
+@charset "utf-8";
+
+form{
+    width: 500px;
+    height: 600px;
+    margin: 0px auto;
+    overflow: hidden;
+}
+
+.login{
+    width: 480px;
+    height: 300px;
+    margin: 150px auto;
+    border: 1px solid #475166;
+    border-radius: 5px;
+    box-shadow: 5px 5px 5px #475166;
+    /*background: rgba(237, 223, 222, 0.4);
+    filter:progid:DXImageTransform.Microsoft.gradient(startcolorstr=#4ceddfde,endcolorstr=#4ceddfde);*/
+}
+
+.login .title{
+    height: 40px;
+    line-height: 40px;
+    font-size: 18px;
+    font-weight: bold;
+    padding-left: 20px;
+    border-bottom: 1px solid #475166;
+    margin-bottom: 30px;
+}
+
+.login li{
+    height: 40px;
+    padding-left: 20px;
+    position: relative;
+}
+.login li input[type='text'],input[type='password']{
+    border: 1px solid #475166;
+    width: 360px;
+    height: 25px;
+    font-size: 14px;
+    padding-left: 80px;
+}
+
+.login li span{
+    position: absolute;
+}
