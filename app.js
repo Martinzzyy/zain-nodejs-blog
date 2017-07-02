@@ -45,6 +45,13 @@ app.use('/', index);
 app.get('/zain/login',function(req, res){
   res.render('zain_login');
 });
+app.post('/zain/login',function(req, res){
+  var account = req.body.account;
+  var passwd = req.body.passwd;
+  console.log(account);
+  console.log(passwd);
+  res.render('zain_login');
+});
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');

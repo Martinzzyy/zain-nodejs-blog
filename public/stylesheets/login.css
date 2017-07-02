@@ -31,6 +31,7 @@ form{
 .login li{
     height: 40px;
     padding-left: 20px;
+    margin-bottom: 20px;
     position: relative;
 }
 .login li input[type='text'],input[type='password']{
@@ -38,9 +39,21 @@ form{
     width: 360px;
     height: 25px;
     font-size: 14px;
-    padding-left: 80px;
+    padding-left: 85px;
 }
-
+.login li input[type='submit']{
+    width: 80px;
+    height: 25px;
+    background-color: #33c4bf;
+    cursor: pointer;
+}
 .login li span{
     position: absolute;
+    background-color: #c1d1db;
+    width: 80px;
+    height: 25px;
+    line-height: 25px;
+    text-align: center;
+    top:1px;
+    left: 21px;
 }

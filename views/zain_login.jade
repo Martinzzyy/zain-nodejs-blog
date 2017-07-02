@@ -11,7 +11,10 @@ body
             div.title 登录
             ul
                 li 
-                    input(type='text')
+                    span 账号：
+                    input(type='text',id='account',name='account')
                 li
-                    input(type='password')
-                li 789
+                    span 密码：
+                    input(type='password',id='passwd', name='passwd')
+                li
+                    input(type='submit', value='登录')
