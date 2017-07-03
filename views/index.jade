@@ -2,7 +2,7 @@ extends layout
 block styles
   link(rel='stylesheet', href='/stylesheets/index.css')
 block content
-  -if(!!list){
+  -if(list.length > 0){
   - for(var i in list){
       div=list[i]
   - }

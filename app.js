@@ -8,8 +8,11 @@ var session = require('express-session');
 
 var config = require('./models/baseconfig');
 var LabelsHelper = require('./models/labels');
-
+var AdminUser = require('./models/adminuser');
+var Log = require('./models/log');
 var index = require('./routes/index');
+
+var zain_index = require('./routes/zain/index');
 
 var app = express();
 // view engine setup
@@ -20,43 +23,95 @@ app.locals.url = config.Url;
 app.locals.title = config.myName+'的博客';
 app.locals.keywords = config.KeyWords.join(',');
 
-console.log('labels'+app.locals.labels);
+function getLabel(){
+  try {
+    LabelsHelper.getAll(function(data){
+      app.locals.labels = data;
+    });
+  } catch (error) {
+    Log('select label error: '+error);
+  }
+}
 
 if(!app.locals.labels){
-  LabelsHelper.getAll(function(data){
-    app.locals.labels = data;
-  });
+  getLabel();
 }
 setInterval(function(){
-  LabelsHelper.getAll(function(data){
-    app.locals.labels = data;
-  });
+  getLabel();
 },1000*60*10);
+
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+//session
+app.use(session({
+    secret: 'zainblog.com',//服务器端生成session的签名
+    cookie: {path:'/zain',maxAge: 1800000},  //设置maxAge是1800000ms，即30分钟后session和相应的cookie失效过期
+    rolling: true,
+    resave:true,//当客户端并行发送多个请求时，其中一个请求在另一个请求结束时对session进行修改覆盖并保存。
+    saveUninitialized: false//初始化session时是否保存到存储。默认为true
+}))
 app.use(express.static(path.join(__dirname, 'public')));
 
+
 app.use('/', index);
+
+app.use(function(req,res,next){
+  
+  var url = req.originalUrl;
+  console.log(url);
+  if(url == '/zain/index' && !req.session.user){
+    return res.redirect('/zain/login');
+  }
+  next();
+})
+
+app.use('/zain/index',zain_index);
 
 app.get('/zain/login',function(req, res){
   res.render('zain_login');
 });
 app.post('/zain/login',function(req, res){
-  var account = req.body.account;
-  var passwd = req.body.passwd;
-  console.log(account);
-  console.log(passwd);
-  res.render('zain_login');
+  var account = req.body.account,
+    passwd = req.body.passwd,
+    str = "[@/'\"#$%&^*;]+",
+    reg = new RegExp(str),
+    error = '-1';
+  if(!account){
+    error = '账号不能为空!'
+  }else if(!passwd){
+    error = '密码不能为空!'
+  }else if(reg.test(account)){
+    error = '账号包含非法字符!';
+  }
+
+  if('-1' != error){
+    res.render('zain_login',{result:{
+      error:error
+    }});
+  }
+  AdminUser.login(account,passwd,function(data){
+    if(data.length > 0){
+      req.session.user = data;
+      res.redirect('/zain/index');
+    }else{
+      res.render('zain_login',{result:{
+        error:'账号密码错误!'
+      }});
+    }
+  });
+  
+  
 });
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
+  console.log('404');
   var err = new Error('Not Found');
   err.status = 404;
-  next(err);
+  res.render('notfound');
 });
 
 // error handler

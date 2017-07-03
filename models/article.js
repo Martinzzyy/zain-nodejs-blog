@@ -1,9 +1,10 @@
 var config = require('./baseconfig');
 var atricle_model = require('./article_model');
 var SqlHelper = require('./sqlitehelper');
+var Log = require('./log');
 
 var AtricleHelper = {
-    getList: function(search,label,pageIndex, pageSize){
+    getList: function(callback,search,label,pageIndex, pageSize){
         pageIndex = pageIndex || 1;
         pageSize = pageSize || config.pageSize;
         var sql = new Array();
@@ -30,8 +31,9 @@ var AtricleHelper = {
                     labelid : arr[i].LabelId,
                 });
             }
-            return result;
+            callback && callback(result);
         });
+        
     }
 }
 

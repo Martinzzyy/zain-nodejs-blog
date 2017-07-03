@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-
+var Log = require('../models/log');
 var article = require('../models/article');
 var SearchFilter = require('../models/searchfilter');
 
@@ -11,15 +11,17 @@ router.get('/', function(req, res, next) {
   if(!label || isNaN(label)) label = null;
   var pageIndex = req.query.i;
   if(!pageIndex || isNaN(pageIndex)) pageIndex = null;
-  var data = [],labels = [];
   try {
-    data = article.getList(search,label,pageIndex);
+    article.getList(function(data){
+      res.render('index', { list:data });
+    },search,label,pageIndex);
+    console.log(data);
   } catch (error) {
-    
+    Log('select Aritcle by pageIndex: '+pageIndex+', search: '+search+', label: '+label+', '+error);
   }
   
 
-  res.render('index', { list:data });
+  
 });
 
 module.exports = router;

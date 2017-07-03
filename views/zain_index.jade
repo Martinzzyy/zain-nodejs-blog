@@ -1,0 +1,34 @@
+doctype html
+html
+  head
+  title 管理后台首页
+  link(rel='stylesheet', href='/stylesheets/zain-base.css')
+  script(src='https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js')
+  script(src='/javascripts/zain-index.js')
+body
+    div.bg-img
+        img(src= bgimg)
+    div.header
+        div.bg-img
+            img(src='/images/header-bg.png')
+        div.user 当前用户：
+            i.name zain
+            a(href='#') 退出
+    div.content
+        div.left
+            ul#rootMenu
+                -for(var i in menus){
+                    li
+                        a(href='#{menus[i].Url}') #{menus[i].Name}
+                        img(src='/images/arrow-left.png').nofind-img
+                        -var children = menus[i].Children;
+                        -if(!!children && children.length > 0){
+                            ul.children-menu
+                                -for(var j in children){
+                                    li(url='#{children[j].Url}') #{children[j].Name}
+                                -}
+                        -}
+                        
+                            
+                -}
+        iframe(frameborder="0" marginheight="0" marginwidth="0" scrolling="no").iframeContent

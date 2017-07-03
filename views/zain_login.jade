@@ -6,6 +6,9 @@ html
   link(rel='stylesheet', href='/stylesheets/login.css')
   script(src='https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js')
 body
+    -if(!!result){
+        div.error-panel #{result.error}
+    -}
     form(name='loginform',id='loginform',method='post')
         div.login
             div.title 登录

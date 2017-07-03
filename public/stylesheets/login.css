@@ -50,10 +50,24 @@ form{
 .login li span{
     position: absolute;
     background-color: #c1d1db;
+    border-right: 1px solid #475166;
     width: 80px;
     height: 25px;
     line-height: 25px;
     text-align: center;
     top:1px;
     left: 21px;
+}
+
+.error-panel{
+    width: 500px;
+    position: absolute;
+    background-color: #f2dede;
+    border:1px solid #ebccd1;
+    color: #a94442;
+    padding: 15px;
+    border-radius: 4px;
+    top:100px;
+    left:50%;
+    transform: translate(-50%, -50%); 
 }
