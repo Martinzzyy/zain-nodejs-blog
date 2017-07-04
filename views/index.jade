@@ -3,10 +3,12 @@ block styles
   link(rel='stylesheet', href='/stylesheets/index.css')
 block content
   -if(list.length > 0){
-  - for(var i in list){
-      div=list[i]
-  - }
-    
+    - for(var i in list){
+        div=list[i]
+    - }
+    a(url='#{urls.uppage}') «上一页
+    a(url='#{urls.nextpage}') 下一页»
   -}else{
     div.NullData  向着代码，发起进攻(　 ´-ω ･)▄︻┻┳══━一
   -}
+  
