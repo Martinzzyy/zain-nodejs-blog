@@ -16,7 +16,7 @@ html
         div.tweet 好写代码不求甚解
         //搜索
         form(method='get',action='#{urls.searchUrl}',id='searchform')
-          input(type='text', value='#{urls.nextpage}' name='s',id='s',placeholder='搜索')
+          input(type='text', name='s',id='s',placeholder='搜索')
       //左边文章部分
       div#main-left
         block content

@@ -13,6 +13,7 @@ var Log = require('./models/log');
 var index = require('./routes/index');
 
 var zain_index = require('./routes/zain/index');
+var zain_article = require('./routes/zain/article');
 
 var app = express();
 // view engine setup
@@ -22,6 +23,9 @@ app.locals.myname = config.myName;
 app.locals.url = config.Url;
 app.locals.title = config.myName+'的博客';
 app.locals.keywords = config.KeyWords.join(',');
+app.locals.urls = {
+  searchUrl:config.Url
+}
 
 function getLabel(){
   try {
@@ -60,16 +64,15 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', index);
 
 app.use(function(req,res,next){
-  
   var url = req.originalUrl;
-  console.log(url);
-  if(url == '/zain/index' && !req.session.user){
-    return res.redirect('/zain/login');
+  if((url == '/zain/index' || url == '/zain/article') && !req.session.user){
+    return res.redirect('/zain/login?callback='+url);
   }
   next();
 })
 
 app.use('/zain/index',zain_index);
+app.use('/zain/article',zain_article)
 
 app.get('/zain/login',function(req, res){
   res.render('zain_login');
@@ -96,7 +99,12 @@ app.post('/zain/login',function(req, res){
   AdminUser.login(account,passwd,function(data){
     if(data.length > 0){
       req.session.user = data;
-      res.redirect('/zain/index');
+      var url = req.query.callback;
+      if(!!url){
+        res.redirect(url);
+      }else{
+        res.redirect('/zain/index');
+      }
     }else{
       res.render('zain_login',{result:{
         error:'账号密码错误!'
@@ -117,9 +125,9 @@ app.use(function(req, res, next) {
 // error handler
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development
+  console.log('error url: '+req.originalUrl);
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
-
   // render the error page
   res.status(err.status || 500);
   res.render('error');
