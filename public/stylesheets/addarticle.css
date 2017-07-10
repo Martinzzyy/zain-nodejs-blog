@@ -1,0 +1,60 @@
+.title{
+    width: 100%;
+    border-bottom: 1px solid #ddd;
+    height: 50px;
+    font-size: 32px;
+    outline: 0;
+    margin-bottom: 20px;
+}
+.subtitle{
+    height: 100px;
+    resize: none;
+    width: 100%;
+    outline: 0;
+    margin-bottom: 20px;
+}
+#article{
+    height:300px;
+    resize:none;
+}
+.add-title-picture-panel{
+    width: 92px;
+    height: 120px;
+    position: relative;
+}
+.add-title-picture-a{
+    width: 91px;
+    height: 91px;
+    overflow: hidden;
+    position: absolute;
+    background-image: url('../images/add_img.png')
+}
+.add-title-picture-a:hover{
+    background-image: url('../images/add_img_h.png')
+}
+.add-title-picture-input{
+    position: absolute;
+    font-size: 100px;
+    right: 0;
+    top: 0;
+    opacity: 0;
+    filter: alpha(opacity=0);
+    cursor: pointer
+}
+.add-title-picture-des{
+    position: absolute;
+    bottom: 0;
+    line-height: 29px;
+    color: #fff;
+    font-size: 14px;
+    width: 91px;
+    text-align: center;
+    background:rgba(0,0,0,0.6);
+    filter:progid:DXImageTransform.Microsoft.gradient(startcolorstr=#99000000,endcolorstr=#99000000)
+}
+
+#title_picture_callback{
+    display: none;
+    width: 400px;
+    height: 300px;
+}
