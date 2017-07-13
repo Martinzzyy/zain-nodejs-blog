@@ -28,7 +28,7 @@ var Tools = {
         var reg = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
         return reg.test(id);//通过为true
     },
-    checkＭobile: function (num) {
+    checkMobile: function (num) {
         var mobile = /^1[3|4|5|7|8]\d{9}$/;
         var tel = /^(\(\d{3,4}\)|\d{3,4}-|\s)?\d{7,14}$/;
         if (mobile.test(num) || tel.test(num))

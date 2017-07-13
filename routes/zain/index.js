@@ -8,7 +8,6 @@ const request = require('request');
 router.get('/',function(res,req){
     request.get('http://cn.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1&mkt=zh-CN',function(error,response,body){
         const img = JSON.parse(body).images[0];
-        const arr = img.url.split('/');
         const str = 'http://cn.bing.com'+img.url;
 
         Menus.getAll(function(data){

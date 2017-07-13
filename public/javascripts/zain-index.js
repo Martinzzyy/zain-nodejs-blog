@@ -7,6 +7,20 @@
 			return '';
 		}
 	};
+	function setBackgroundImage(){
+		$.ajax({
+			url:'http://cn.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1&mkt=zh-CN',
+			type:'GET',
+			datatype:'text',
+    		jsonp:'callback',
+			success:function(data){
+				console.log(data);
+				// var img = JSON.parse(data).images[0],
+				// 	str = 'http://cn.bing.com'+img.url;
+				// $('#bodybg').attr('src',src);
+			}
+		})
+	}
 	function setFind(find){
 		var urlFind;
 		if(!!find) urlFind = find;
@@ -67,8 +81,7 @@
 	    $("body>.bg-img>img").height($contentHei + 91);
 	    $iframe.height($contentHei).width($contemtWid - $left.width());
 	};
-	setSize();
-	$(window).resize(setSize);
+	
 	$('.left a').click(function(){
 		setFind($(this).attr('href').replace('#',''));
 	});
@@ -81,5 +94,8 @@
 		    $('.iframeContent').attr('src', url).show();
 		    setSize();
 		}
-	})
+	});
+
+	setSize();
+	$(window).resize(setSize);
 });

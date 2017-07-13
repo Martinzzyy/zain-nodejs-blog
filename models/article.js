@@ -10,7 +10,7 @@ var AtricleHelper = {
         var sql = new Array();
         sql.push('select * from Article where State='+atricle_model.ArticleState.Normal);
         if(!!search){
-            sql.push(" and Title like '%"+search+"%' or Subtitle like '%"+search+"%' ");
+            sql.push(" and Title like '%"+search+"%' or Subtitle like '%"+search+"%' or KeyWords like '%"+search+"%'");
         }
         if(!!label){
             sql.push(" and LabelId="+label);
@@ -41,8 +41,8 @@ var AtricleHelper = {
         sql.push('select rowid,Title,CreateTime,LabelId,(select count(rowid) from ArticleSee where ArticleId=a.rowid) as see from Article as a where State='+atricle_model.ArticleState.Normal);
         countSql.push('select count(rowid) as count from Article where State='+atricle_model.ArticleState.Normal);
         if(!!search){
-            sql.push(" and Title like '%"+search+"%' ");
-            countSql.push(" and Title like '%"+search+"%' ")
+            sql.push(" and Title like '%"+search+"%'  or Subtitle like '%"+search+"%' or KeyWords like '%"+search+"%'");
+            countSql.push(" and Title like '%"+search+"%' or Subtitle like '%"+search+"%' or KeyWords like '%"+search+"%'")
         }
         if(!!label){
             sql.push(" and LabelId="+label);
@@ -71,7 +71,9 @@ var AtricleHelper = {
                 callback && callback([],-1);
             }
         });
-        
+    },
+    create:function(data,callback){
+        var sql = "insert Article(Title,Subtitle,TitlePicture,Content,CreateTime,KeyWords,LabelId,State) values()"
     }
 }
 

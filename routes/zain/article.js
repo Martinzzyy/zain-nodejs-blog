@@ -14,11 +14,19 @@ router.get('/',function(req,res){
 });
 
 router.get('/add',function(req,res){
-    // LabelsHelper.getAll(function(data){
-      
-    // });
     res.render('zain_addarticle');
-})
+});
+router.post('/add',function(req,res){
+    var title = req.body.title,
+        subtitle = req.body.subtitle,
+        title_picture = req.body.picture,
+        content = req.body.content,
+        label = req.body.label,
+        keyword = req.body.kwyword,
+        id = req.body.id,
+        type = req.body.type;
+    
+});
 
 router.post('/',function(req,res){
     var pageIndex = req.body.pageindex,
