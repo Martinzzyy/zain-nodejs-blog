@@ -65,7 +65,9 @@ app.use('/', index);
 
 app.use(function(req,res,next){
   var url = req.originalUrl;
-  if((url == '/zain/index' || url == '/zain/article' || url == '/zain/article/add') && !req.session.user){
+  if((url == '/zain/index' 
+      || url == '/zain/article' 
+      || url == '/zain/article/add') && !req.session.user){
     return res.redirect('/zain/login?callback='+url);
   }
   next();

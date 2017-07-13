@@ -6,6 +6,7 @@ var Resuslt = require('../../models/ResultModel');
 var Log = require('../../models/log');
 var config = require('../../models/baseconfig');
 var multiparty = require('multiparty');
+var LabelsHelper = require('../../models/labels');
 var fs = require('fs');
 
 router.get('/',function(req,res){
@@ -13,6 +14,9 @@ router.get('/',function(req,res){
 });
 
 router.get('/add',function(req,res){
+    // LabelsHelper.getAll(function(data){
+      
+    // });
     res.render('zain_addarticle');
 })
 
@@ -100,7 +104,7 @@ function uploadthinker(req,path,callback){
             callback('');
         }else{
             console.log(files);
-            callback('http://localhost:6010/'+files.img[0].path.replace('\public',''));
+            callback(config.Url +files.img[0].path.replace('\public',''));
         }
     })
 }

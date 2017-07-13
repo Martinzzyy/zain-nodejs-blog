@@ -13,6 +13,13 @@
     });
     $('#submitbtn').click(function(){
         layer.alert($("#article").val());
+    });
+    $('.labels').click(function(){
+        if($(this).is('.find-label')){
+            $(this).removeClass('find-label');
+        }else{
+            $(this).addClass('find-label');
+        }
     })
 });
 function ajaxFileUpload() {

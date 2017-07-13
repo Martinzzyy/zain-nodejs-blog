@@ -20,9 +20,14 @@ body
           a.add-title-picture-a
             input(type='file', name='title_picture', id='title_picture', onchange='ajaxFileUpload()').add-title-picture-input
           div.add-title-picture-des 标题图
-        img(src='')#title_picture_callback
+          img(src='')#title_picture_callback
         textarea(name="content" rows="10")#article
 
+        div.label-panel
+          -for(var i in labels){
+            span.labels(dataid= labels[i].id, href='?l=#{labels[i].id}')= labels[i].name
+          -}
+        input(type='text', placeholder='关键字').keyword
         input(type='button', value='提交', id='submitbtn')
 
 
