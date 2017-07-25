@@ -17,14 +17,31 @@ router.get('/add',function(req,res){
     res.render('zain_addarticle');
 });
 router.post('/add',function(req,res){
-    var title = req.body.title,
-        subtitle = req.body.subtitle,
-        title_picture = req.body.picture,
-        content = req.body.content,
-        label = req.body.label,
-        keyword = req.body.kwyword,
-        id = req.body.id,
-        type = req.body.type;
+    var subdata = {
+            title : req.body.title,
+            subtitle: req.body.subtitle,
+            title_picture: req.body.picture,
+            content: req.body.content,
+            label: req.body.label,
+            keyword: req.body.kwyword,
+            id : req.body.id,
+            type : req.body.type
+        };
+    if(!Tools.isDefine(subdata.title)){
+        res.send(Resuslt(-1,'标题不能为空'));
+    }else if(!Tools.isDefine(subdata.subtitle)){
+        res.send(Resuslt(-1,'副标题不能为空'));
+    }else if(!Tools.isDefine(subdata.title_picture)){
+        res.send(Resuslt(-1,'标题图不能为空'));
+    }else if(!Tools.isDefine(subdata.content)){
+        res.send(Resuslt(-1,'内容不能为空'));
+    }else if(!Tools.subdata(subdata.label) || isNaN(subdata.label)){
+        res.send(Resuslt(-1,'label不能为空'));
+    }else if(!Tools.isDefine(subdata.keyword)){
+        res.send(Resuslt(-1,'关键词不能为空'));
+    }else if(!Tools.isDefine(subdata.type)){
+        res.send(Resuslt(-1,'类型错误'));
+    }
     
 });
 

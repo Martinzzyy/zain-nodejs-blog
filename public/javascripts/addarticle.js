@@ -32,8 +32,8 @@
             content: $("#article").val(),
             label: $('.find-label').attr('dataid'),
             keyword: $('#keyword').val(),
-            id = id,
-            type = type
+            id : id,
+            type : type
         };
         if(!Tools.isDefine(subdata.title)){
             layer.msg('标题不能为空');
